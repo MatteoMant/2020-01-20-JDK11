@@ -1,6 +1,8 @@
 package it.polito.tdp.artsmia;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.artsmia.model.Model;
@@ -31,7 +33,7 @@ public class ArtsmiaController {
     private Button btnCalcolaPercorso;
 
     @FXML
-    private ComboBox<?> boxRuolo;
+    private ComboBox<String> boxRuolo;
 
     @FXML
     private TextField txtArtista;
@@ -54,11 +56,23 @@ public class ArtsmiaController {
     @FXML
     void doCreaGrafo(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Crea grafo");
+    	
+    	String ruolo = boxRuolo.getValue();
+    	if (ruolo == null) {
+    		txtResult.setText("Per favore selezionare un ruolo!\n");
+    		return;
+    	}
+    	this.model.creaGrafo(ruolo);
+    	
     }
 
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	// Adesso posso popolare il menu a tendina dei ruoli
+    	List<String> ruoli = this.model.getAllRoles();
+    	Collections.sort(ruoli);
+    	boxRuolo.getItems().addAll(ruoli);
     }
 
     
@@ -70,6 +84,5 @@ public class ArtsmiaController {
         assert boxRuolo != null : "fx:id=\"boxRuolo\" was not injected: check your FXML file 'Artsmia.fxml'.";
         assert txtArtista != null : "fx:id=\"txtArtista\" was not injected: check your FXML file 'Artsmia.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Artsmia.fxml'.";
-
     }
 }
