@@ -137,7 +137,7 @@ public class ArtsmiaDAO {
 	public List<Adiacenza> getAllAdiacenze(Map<Integer, Artist> idMap, String ruolo){
 		String sql = "SELECT a1.artist_id AS a1, a2.artist_id AS a2, COUNT(DISTINCT eo1.exhibition_id) AS peso "
 				+ "FROM exhibition_objects eo1, exhibition_objects eo2, authorship a1, authorship a2 "
-				+ "WHERE eo1.exhibition_id = eo2.exhibition_id AND eo1.object_id > eo2.object_id AND eo1.object_id = a1.object_id AND eo2.object_id = a2.object_id AND a1.role = ? AND a2.role = ? "
+				+ "WHERE eo1.exhibition_id = eo2.exhibition_id AND eo1.object_id = a1.object_id AND eo2.object_id = a2.object_id AND a1.role = ? AND a2.role = ? "
 				+ "AND a1.artist_id > a2.artist_id "
 				+ "GROUP BY a1.artist_id, a2.artist_id";
 		List<Adiacenza> result = new ArrayList<>();

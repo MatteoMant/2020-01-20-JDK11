@@ -64,6 +64,10 @@ public class ArtsmiaController {
     	}
     	this.model.creaGrafo(ruolo);
     	
+    	txtResult.setText("Grafo creato!\n");
+    	txtResult.appendText("# Vertici : " + this.model.getNumVertici() + "\n");
+    	txtResult.appendText("# Archi : " + this.model.getNumArchi() + "\n");
+    	
     }
 
     public void setModel(Model model) {

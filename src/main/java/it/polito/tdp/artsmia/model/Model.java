@@ -29,6 +29,7 @@ public class Model {
 		// Aggiunta dei vertici
 		Graphs.addAllVertices(this.grafo, this.dao.getAllArtistsWithRole(ruolo));		
 		
+		System.out.print("NUMERO VERTICI " + this.grafo.vertexSet().size());
 		// Aggiunta degli archi
 		for (Adiacenza a : this.dao.getAllAdiacenze(idMap, ruolo)) {
 			Graphs.addEdge(this.grafo, a.getA1(), a.getA2(), a.getPeso());
@@ -38,4 +39,13 @@ public class Model {
 	public List<String> getAllRoles(){
 		return this.dao.getAllRoles();
 	}
+	
+	public int getNumVertici() {
+		return this.grafo.vertexSet().size();
+	}
+	
+	public int getNumArchi() {
+		return this.grafo.edgeSet().size();
+	}
+	
 }
