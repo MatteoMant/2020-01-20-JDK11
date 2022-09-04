@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.artsmia.model.Adiacenza;
+import it.polito.tdp.artsmia.model.Artist;
 import it.polito.tdp.artsmia.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,13 +46,41 @@ public class ArtsmiaController {
     @FXML
     void doArtistiConnessi(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Calcola artisti connessi");
+    	
+    	List<Adiacenza> connessi = this.model.getAllAdiacenze();
+    	txtResult.appendText("ARTISTI CONNESSI: \n");
+    	for (Adiacenza a : connessi) {
+    		txtResult.appendText(a + "\n");
+    	}
     }
 
     @FXML
     void doCalcolaPercorso(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Calcola percorso");
+    	
+    	try {
+    		int artistId = Integer.parseInt(txtArtista.getText());
+    		Artist artista = this.model.getArtist(artistId);
+    		if (artista == null) {
+    			txtResult.appendText("Artista inesistente!\n");
+    			return;
+    		}
+    		
+    		List<Artist> percorso = this.model.ricercaCammino(artista);
+    		if (percorso == null) {
+    			txtResult.appendText("NON esiste un cammino!\n");
+    			return;
+    		} else {
+    			txtResult.appendText("Il cammino trovato è: \n");
+    			for (Artist a : percorso) {
+    				txtResult.appendText(a + "\n");
+    			}
+    		}
+    		
+    	} catch (NumberFormatException e) {
+    		txtResult.appendText("Per favore inserire un id artista valido!\n");
+    		return;
+    	}
     }
 
     @FXML

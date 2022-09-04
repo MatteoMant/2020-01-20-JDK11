@@ -48,6 +48,10 @@ public class Artist {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return artist_id + "";
+	}
 	
 }
