@@ -16,7 +16,7 @@ import it.polito.tdp.artsmia.db.ArtsmiaDAO;
 
 public class Model {
 	
-	ArtsmiaDAO dao;
+	private ArtsmiaDAO dao;
 	private Graph<Artist, DefaultWeightedEdge> grafo;
 	private Map<Integer, Artist> idMap;
 	
@@ -88,7 +88,7 @@ public class Model {
 			
 		}
 		
-		// Quando termina la ricorsione
+		// Quando termina un livello della ricorsione mi salvo la soluzione migliore fino a quel momento
 		if(parziale.size() > best.size()) {
 			this.best = new ArrayList<>(parziale);
 		}
