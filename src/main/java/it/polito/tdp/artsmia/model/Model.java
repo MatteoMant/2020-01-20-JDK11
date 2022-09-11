@@ -97,7 +97,7 @@ public class Model {
 	
 	public Artist getArtist(int idArtista) {
 		return idMap.get(idArtista);
-	}
+	} 
 	
 	public List<String> getAllRoles(){
 		return this.dao.getAllRoles();
